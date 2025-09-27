@@ -1,15 +1,17 @@
 {
-  "name": "backend",
+  "name": "teams-project-management-saas-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "Backend API for the Teams Project Management SaaS platform built with Bun, Express, and MongoDB.",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "bun --hot src/index.ts",
     "start": "bun dist/index.js",
-    "build": "tsgo && cp /package.json ./dist",
+    "build": "bun run clean:dist && tsgo --project tsconfig.json && cp package.json dist/",
     "check": "tsgo --noEmit",
     "seed": "bun src/seeders/role.seeder.ts",
-    "clean": "rm -rf dist node_modules"
+    "clean": "bun run clean:dist && rm -rf node_modules",
+    "clean:dist": "rm -rf dist"
   },
   "keywords": [
     "bun",
@@ -20,6 +22,17 @@
   ],
   "author": "Sachin Thapa",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sachinthapa572/Teams-Project-Management-Saas-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sachinthapa572/Teams-Project-Management-Saas-server/issues"
+  },
+  "homepage": "https://github.com/sachinthapa572/Teams-Project-Management-Saas-server#readme",
+  "engines": {
+    "bun": ">=1.1.0"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cookie-session": "^2.1.0",
