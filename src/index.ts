@@ -29,11 +29,11 @@ app.use(
     name: 'session',
     keys: [config.SESSION_SECRET],
     maxAge: 24 * 60 * 60 * 1000,
-    secure: config.NODE_ENV === 'production',
+    secure: false, // Temporarily set to false for local testing
     httpOnly: true,
     sameSite: config.NODE_ENV === 'production' ? 'none' : 'lax',
     domain:
-      config.NODE_ENV === 'production'
+      config.NODE_ENV === 'production' && config.FRONTEND_ORIGIN.startsWith('http')
         ? new URL(config.FRONTEND_ORIGIN).hostname.replace(/^www\./, '')
         : undefined,
   })
