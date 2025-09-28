@@ -31,7 +31,9 @@ app.use(
     httpOnly: true,
     sameSite: config.NODE_ENV === 'production' ? 'none' : 'lax',
     domain:
-      config.NODE_ENV === 'production' ? config.FRONTEND_ORIGIN : undefined,
+      config.NODE_ENV === 'production'
+        ? new URL(config.FRONTEND_ORIGIN).hostname.replace(/^www\./, '')
+        : undefined,
   })
 );
 

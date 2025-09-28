@@ -60,6 +60,9 @@ export const loginController = asyncHandler(
             return next(err);
           }
 
+          console.log('Session after login:', req.session); // Debug log
+          console.log('Cookies in response:', res.getHeaders()['set-cookie']); // Debug log
+
           return res.status(HTTPSTATUS.OK).json({
             message: 'Logged in successfully',
             user,
