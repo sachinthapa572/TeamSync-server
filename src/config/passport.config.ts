@@ -62,5 +62,17 @@ passport.use(
   )
 );
 
-passport.serializeUser((user: any, done) => done(null, user));
-passport.deserializeUser((user: any, done) => done(null, user));
+passport.serializeUser((user: any, done) => {
+  try {
+    JSON.stringify(user);
+    console.log('Serializing user:', user);
+    done(null, user);
+  } catch (err) {
+    console.error('Serialization error:', err);
+    done(err);
+  }
+});
+passport.deserializeUser((user: any, done) => {
+  console.log('Deserializing user:', user);
+  done(null, user);
+});

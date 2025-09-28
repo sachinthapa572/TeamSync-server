@@ -17,6 +17,8 @@ import router from './routes/router';
 const app = express();
 const BASE_PATH = config.BASE_PATH;
 
+app.set('trust proxy', 1); // Trust first proxy for secure cookies behind load balancer
+
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));

@@ -60,8 +60,17 @@ export const loginController = asyncHandler(
             return next(err);
           }
 
-          console.log('Session after login:', req.session); // Debug log
-          console.log('Cookies in response:', res.getHeaders()['set-cookie']); // Debug log
+          if (req.session) {
+            req.session.user = user; // Explicitly set session for cookie-session
+          }
+          console.log('User logged in:', user);
+          console.log('Session after login:', req.session);
+          console.log(
+            'Session keys:',
+            req.session ? Object.keys(req.session) : 'null'
+          );
+          console.log('Session passport:', req.session?.passport);
+          console.log('Cookies in response:', res.getHeaders()['set-cookie']);
 
           return res.status(HTTPSTATUS.OK).json({
             message: 'Logged in successfully',
