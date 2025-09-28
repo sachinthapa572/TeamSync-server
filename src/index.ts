@@ -29,13 +29,15 @@ app.use(
     name: 'session',
     keys: [config.SESSION_SECRET],
     maxAge: 24 * 60 * 60 * 1000,
-    secure: config.NODE_ENV === 'production',
-    httpOnly: true,
-    sameSite: config.NODE_ENV === 'production' ? 'none' : 'lax',
-    domain:
-      config.NODE_ENV === 'production'
-        ? new URL(config.FRONTEND_ORIGIN).hostname.replace(/^www\./, '')
-        : undefined,
+    cookie: {  // Nest here for precision
+      secure: config.NODE_ENV === 'production',  // HTTPS only – your jam now
+      httpOnly: true,  // XSS shield, always
+      sameSite: config.NODE_ENV === 'production' ? 'none' : 'lax',  // Cross-origin unlocked in prod
+      domain:
+        config.NODE_ENV === 'production'
+          ? new URL(config.FRONTEND_ORIGIN).hostname.replace(/^www\./, '')  // e.g., '.yourdomain.com' for subs
+          : undefined,
+    },
   })
 );
 
