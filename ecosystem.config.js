@@ -3,8 +3,8 @@ module.exports = {
     name: 'teamManagement',
     script: 'src/index.ts',
     interpreter: 'bun',
-    instances: 1,
-    exec_mode: 'fork', // Add this - Bun works better with fork mode
+    instances: 'max', // Use 'max' to utilize all available CPU cores
+    exec_mode: 'fork', // Bun works well with fork mode for multi-processing
     autorestart: true,
     watch: false,
     max_memory_restart: '1G',
