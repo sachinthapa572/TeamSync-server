@@ -35,8 +35,8 @@ app.use(
       sameSite: config.NODE_ENV === 'production' ? 'none' : 'lax',  // Cross-origin unlocked in prod
       domain:
         config.NODE_ENV === 'production'
-          ? new URL(config.FRONTEND_ORIGIN).hostname.replace(/^www\./, '')  // e.g., '.yourdomain.com' for subs
-          : undefined,
+          ? `.${new URL(config.FRONTEND_ORIGIN.startsWith('http') ? config.FRONTEND_ORIGIN : `https://${config.FRONTEND_ORIGIN}`).hostname.replace(/^www\./, '')}`  // Now matches the comment and is more robust
+          : undefined
     },
   })
 );
