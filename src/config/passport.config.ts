@@ -23,8 +23,6 @@ passport.use(
     async (req: Request, accessToken, refreshToken, profile, done) => {
       try {
         const { email, sub: googleId, picture } = profile._json;
-        console.log(profile, 'profile');
-        console.log(googleId, 'googleId');
         if (!googleId) {
           throw new NotFoundException('Google ID (sub) is missing');
         }
@@ -65,7 +63,6 @@ passport.use(
 passport.serializeUser((user: any, done) => {
   try {
     JSON.stringify(user);
-    console.log('Serializing user:', user);
     done(null, user);
   } catch (err) {
     console.error('Serialization error:', err);
@@ -73,6 +70,5 @@ passport.serializeUser((user: any, done) => {
   }
 });
 passport.deserializeUser((user: any, done) => {
-  console.log('Deserializing user:', user);
   done(null, user);
 });
